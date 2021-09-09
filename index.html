@@ -4,11 +4,54 @@
 <head>
 	<meta charset="utf-8">
 	<title>Les étoiles</title>
+
 </head>
+
 <body>
+	<h1 id="Titre"></h1>
+
+
 <footer>
 	<p>Kata-APOD &copy;</p>
 </footer>
+<script type="text/javascript">
 
+
+
+
+
+
+const body = document.getElementById('body');
+const h1 = document.getElementById('Titre');
+//fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+
+
+const url= "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+
+//var request = new Request(url, {
+//	method: 'POST',
+ //   headers: new Headers()
+
+
+//});
+let reponse= fetch(url)
+
+.then(response => response.json())
+.then(response => {
+	let resp_api=(response);
+	console.log(resp_api.title);
+	document.getElementById('Titre').textContent=resp_api.title;
+})
+
+
+
+
+
+  	
+
+
+
+
+</script>
 </body>
 </html>
