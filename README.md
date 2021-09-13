@@ -2,9 +2,9 @@
 ## But
 Création d'un sit web avec un API de la NASA qui change tout les jours.
 ### Objectif 
-- [ ] La page a un titre
-- [ ]  La page a un pied de page, avec au moins un lien vers le dépôt de code
-- [ ]  Le titre de l'APOD est présent
+- [x] La page a un titre
+- [x]  La page a un pied de page, avec au moins un lien vers le dépôt de code
+- [x]  Le titre de l'APOD est présent
 - [ ]  La date de l'APOD est présente
 - [ ]  La description de l'APOD est présente
 - [ ]  Le copyright de l'APOD est présent
