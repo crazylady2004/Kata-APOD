@@ -4,54 +4,77 @@
 <head>
 	<meta charset="utf-8">
 	<title>Les étoiles</title>
-
-</head>
+	<!-- CDN example (unpkg) -->
+	<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+	</head>
 
 <body>
-	<h1 id="Titre"></h1>
 
+	<h1 id="Titre"></h1>
+	<p id="Descrition"></p>
+	<p id="Date"></p>
+	<form>
+	
+	<img id="img" height="100%" width="100%" >
+	<a id="back" href="#">Back</a> <a id="Head" href="#">Head</a>
+	<p id="Copyright"></p>
 
 <footer>
 	<p>Kata-APOD &copy;</p>
 </footer>
+
 <script type="text/javascript">
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const dateString = urlParams.get('date');
+var dateApi = dateString;
+
+if (dateString == null){
+	var today = new Date();
+	todayString= dayjs(today).format('YYYY-MM-DD')
+	dateApi=todayString
+	console.log(dateApi)
+} 
+console.log(dateApi)
+var dateUTC = new Date(dateApi);
+console.log("dateUTC " + dateUTC)
+dayBefore=dayjs(dateUTC).add(-1,'day');
+dayBeforeString= dayjs(dayBefore).format('YYYY-MM-DD')
+dayAfter=dayjs(dateUTC).add(+1,'day');
+dayAfterString= dayjs(dayAfter).format('YYYY-MM-DD')
 
 
 
 
 
-const body = document.getElementById('body');
-const h1 = document.getElementById('Titre');
+
+
+
 //fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
 
 
-const url= "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
-
-//var request = new Request(url, {
-//	method: 'POST',
- //   headers: new Headers()
-
-
-//});
+const url= "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date="+dateApi;
+const Indurl="index.html?date="+dayBeforeString;
+const AfterUrl="index.html?date="+dayAfterString;
+const Today="index.html?date="
+console.log(Indurl)
 let reponse= fetch(url)
 
 .then(response => response.json())
 .then(response => {
 	let resp_api=(response);
-	console.log(resp_api.title);
 	document.getElementById('Titre').textContent=resp_api.title;
-})
-
-
-
-
-
-  	
-
-
-
-
+	document.getElementById('img').src=resp_api.hdurl;
+	document.getElementById('Date').innerHTML=resp_api.date;
+	document.getElementById('Descrition').textContent=resp_api.explanation;
+	document.getElementById('Copyright').textContent=resp_api.copyright;	
+	document.getElementById("back").href=Indurl;
+	document.getElementById("Head").href=AfterUrl;
+	if (dateString){
+	document.getElementById("Head").href=Today;
+}
+});
 </script>
 </body>
 </html>
